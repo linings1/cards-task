@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.cards-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 30px;
+  flex-wrap: wrap;
+  background-color: #e7ffe75e;
+}
+
+.general-select {
+  display: flex;
+  justify-content: center;
+}
