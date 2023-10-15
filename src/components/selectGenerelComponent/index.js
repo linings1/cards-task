@@ -3,36 +3,39 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Grid } from '@mui/material';
+import { Grid, MenuItem } from '@mui/material';
+import { useFormik } from 'formik';
 
-const SelectGeneralComponent = () => {
-
+const ALL = "Всички";
+const SelectGeneralComponent = ({ data, selectName }) => {
+    const formik = useFormik({
+        initialValues: {
+            dataValue: "",
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
     return (
         <Grid>
-            <FormControl sx={{ m: 2, width: 300 }}>
-                <InputLabel>Category</InputLabel>
+            <FormControl size="small" sx={{ m: 2, width: 300 }}>
+                <InputLabel>{selectName}</InputLabel>
                 <Select
-                    id="demo-multiple-chip"
-                    multiple
-                    value={""}
-                    onChange={() => { }}
-                    input={<OutlinedInput />}
-                // renderValue={(selected) => (
-                //     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                //         {selected.map((value) => (
-                //             <Chip key={value} label={value} />
-                //         ))}
-                //     </Box>
-                // )}
+                    label="Country"
+                    fullWidth
+                    variant="outlined"
+                    onChange={formik.handleChange}
+                    name={"dataValue"}
+                    value={formik?.values?.dataValue}
                 >
-                    {/* {categories.map((category) => (
-                        <MenuItem
-                            key={category}
-                            value={category}
-                        >
-                            {category}
+                    <MenuItem value={ALL}>
+                        {ALL}
+                    </MenuItem>
+                    {data && data.map((dataMenuItem) => (
+                        <MenuItem key={dataMenuItem} value={dataMenuItem}>
+                            {dataMenuItem}
                         </MenuItem>
-                    ))} */}
+                    ))}
                 </Select>
             </FormControl>
         </Grid>
